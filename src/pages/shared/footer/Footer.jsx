@@ -1,9 +1,9 @@
 import React from 'react'
 import { Link } from 'react-router'
-import github from '/public/assets/github.png'
-import linkedin from '/public/assets/linkedin.png'
-import gmail from '/public/assets/gmail.png'
-import fb from '/public/assets/facebook.png'
+import github from '/assets/github.png'
+import linkedin from '/assets/linkedin.png'
+import gmail from '/assets/gmail.png'
+import fb from '/assets/facebook.png'
 
 const Footer = () => {
   return (
@@ -18,10 +18,10 @@ const Footer = () => {
         </ul>
   <nav>
     <div className="grid grid-flow-col gap-4">
-      <Link><img className='w-8 h-8' src={fb} alt="" /></Link>
-      <Link><img className='w-8 h-8' src={gmail} alt="" /></Link>
-      <Link><img className='w-8 h-8' src={github} alt="" /></Link>
-      <Link><img className='w-8 h-8' src={linkedin} alt="" /></Link>
+      <a href='https://www.facebook.com/profile.php?id=100007820023284' target='_blank'><img className='w-8 h-8' src={fb} alt="" /></a>
+      <a href='' target='_blank'><img className='w-8 h-8' src={gmail} alt="" /></a>
+      <a href='https://github.com/mehedihasanshohan' target='_blank'><img className='w-8 h-8' src={github} alt="" /></a>
+      <a href='https://www.linkedin.com/in/mehedihasanshohan/' target='_blank'><img className='w-8 h-8' src={linkedin} alt="" /></a>
     </div>
   </nav>
   <aside>

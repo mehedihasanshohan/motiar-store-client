@@ -14,12 +14,12 @@ const Navbar = () => {
       <ul
         tabIndex="-1"
         className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
-        <li><Link>Services</Link></li>
-        <li><Link>Coberage</Link></li>
-        <li><Link>About US</Link></li>
-        <li><Link>Pricing</Link></li>
-        <li><Link>Blog</Link></li>
-        <li><Link>Contact</Link></li>
+        <li><Link to='/services'>Services</Link></li>
+        <li><Link to='/coverage'>Coverage</Link></li>
+        <li><Link to='/about-us'>About US</Link></li>
+        <li><Link to='/pricing'>Pricing</Link></li>
+        <li><Link to='/blog'>Blog</Link></li>
+        <li><Link to='/contact'>Contact</Link></li>
       </ul>
     </div>
     <img src={logo} className='w-8 h-8' alt="" />
@@ -27,12 +27,12 @@ const Navbar = () => {
   </div>
   <div className="navbar-center hidden lg:flex">
     <ul className="text-xl text-teal-600 flex justify-center items-center gap-6 font-semibold px-1">
-      <li><Link>Services</Link></li>
-      <li><Link>Coberage</Link></li>
-      <li><Link>About US</Link></li>
-      <li><Link>Pricing</Link></li>
-      <li><Link>Blog</Link></li>
-      <li><Link>Contact</Link></li>
+      <li><Link to='/services'>Services</Link></li>
+      <li><Link to='/coverage'>Coverage</Link></li>
+      <li><Link to='/about-us'>About US</Link></li>
+      <li><Link to='/pricing'>Pricing</Link></li>
+      <li><Link to='/blog'>Blog</Link></li>
+      <li><Link to='/contact'>Contact</Link></li>
     </ul>
   </div>
   <div className="navbar-end">
