@@ -24,7 +24,7 @@ const Works = () => {
   return (
     <>
     <h2 className="text-2xl font-bold text-center mt-8 text-secondary">How It Works</h2>
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 p-6">
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
       {items.map((item, index) => (
         <div
           key={index}

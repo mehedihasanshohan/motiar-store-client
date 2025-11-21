@@ -3,14 +3,18 @@ import Banner from '../Banner/Banner'
 import Works from '../Works/Works'
 import OurServices from '../OurServices/OurServices'
 import ServiceSection from '../ServiceSection/ServiceSection'
+import Reviews from '../Reviews/Reviews'
+
+const reviewsPromise = fetch('/data/reviews.json').then(res => res.json());
 
 const Home = () => {
   return (
-    <div>
+    <div className='max-w-7xl mx-auto'>
       <Banner></Banner>
       <Works></Works>
       <OurServices></OurServices>
       <ServiceSection></ServiceSection>
+      <Reviews reviewsPromise={reviewsPromise}></Reviews>
     </div>
   )
 }

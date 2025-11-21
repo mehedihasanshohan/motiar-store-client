@@ -23,8 +23,7 @@ const features = [
 
 const ServiceSection = () => {
   return (
-    <div className="w-full py-16 bg-[#F9FAFB]">
-      <div className="max-w-6xl mx-auto px-4">
+      <div>
         {/* Section Top Border */}
         <div className="border-t border-dashed border-gray-300 mb-10"></div>
 
@@ -54,7 +53,6 @@ const ServiceSection = () => {
         {/* Bottom Border */}
         <div className="border-b border-dashed border-gray-300 mt-10"></div>
       </div>
-    </div>
   );
 };
 
