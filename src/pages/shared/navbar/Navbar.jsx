@@ -20,6 +20,7 @@ const Navbar = () => {
         <li><Link to='/pricing'>Pricing</Link></li>
         <li><Link to='/blog'>Blog</Link></li>
         <li><Link to='/contact'>Contact</Link></li>
+        <li><Link to='/contact'>Contact</Link></li>
       </ul>
     </div>
     <img src={logo} className='w-8 h-8' alt="" />

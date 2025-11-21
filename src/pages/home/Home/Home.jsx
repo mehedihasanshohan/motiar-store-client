@@ -4,6 +4,7 @@ import Works from '../Works/Works'
 import OurServices from '../OurServices/OurServices'
 import ServiceSection from '../ServiceSection/ServiceSection'
 import Reviews from '../Reviews/Reviews'
+import Coverage from '../../coverage/Coverage'
 
 const reviewsPromise = fetch('/data/reviews.json').then(res => res.json());
 
@@ -15,6 +16,7 @@ const Home = () => {
       <OurServices></OurServices>
       <ServiceSection></ServiceSection>
       <Reviews reviewsPromise={reviewsPromise}></Reviews>
+      {/* <Coverage></Coverage> */}
     </div>
   )
 }
