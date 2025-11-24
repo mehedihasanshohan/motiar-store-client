@@ -58,7 +58,7 @@ const Navbar = () => {
                 <Link to="/contact">Contact</Link>
               </li>
               <li>
-                <Link to="/contact">Contact</Link>
+                <Link to='/send-parcel'>Send Parcel</Link>
               </li>
             </ul>
           </div>
@@ -85,11 +85,15 @@ const Navbar = () => {
             <li>
               <Link to="/contact">Contact</Link>
             </li>
+            <li>
+              <Link to='/send-parcel'>Send Parcel</Link>
+            </li>
           </ul>
         </div>
         <div className="navbar-end">
+          <img src={user?.photoURL} className="w-10 h-10 rounded-full mr-2" alt="" />
           {user ? (
-            <a onClick={handleLogout} className="btn btn-accent">Sign Out</a>
+            <a onClick={handleLogout} className="btn btn-accent mr-2">Sign Out</a>
           ) : (
             <Link to='/login' className="btn btn-info ml-4">Login</Link>
           )}
