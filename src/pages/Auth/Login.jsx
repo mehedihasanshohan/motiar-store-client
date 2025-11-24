@@ -1,6 +1,8 @@
 import React from 'react'
 import { useForm } from 'react-hook-form'
 import useAuth from '../../hooks/useAuth';
+import { Link } from 'react-router';
+import SocialLogin from './SocialLogin';
 
 const Login = () => {
   const {
@@ -22,12 +24,17 @@ const Login = () => {
   }
 
   return (
-    <div>
+    <div className='w-full mx-auto'>
       <form onSubmit={handleSubmit(handleLogin)}>
         <fieldset className="fieldset">
+           {/* name */}
+          <label className="label">Name</label>
+          <input type="text" {...register('name', {required: true})} className="input input-bordered w-full" placeholder="Email" />
+          {errors.name?.type === 'required' && <p className='text-red-500 font-semibold'>Name is required</p>}
+
           {/* email */}
           <label className="label">Email</label>
-          <input type="email" {...register('email', {required: true})} className="input" placeholder="Email" />
+          <input type="email" {...register('email', {required: true})} className="input w-full" placeholder="Email" />
           {errors.email?.type === 'required' && <p className='text-red-500 font-semibold'>Email is required</p>}
 
           {/* password */}
@@ -36,7 +43,7 @@ const Login = () => {
             required: true,
             minLength: 6,
             pattern: /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[^A-Za-z0-9]).+$/
-            })} className="input" placeholder="Password" />
+            })} className="input w-full" placeholder="Password" />
           {
             errors.password?.type === "required" &&
              <p className='text-red-500 font-semibold'>Password is required</p>
@@ -50,9 +57,10 @@ const Login = () => {
             <p className='text-red-500'>Password must be at least one
             uppercase, at least one lowercase, at least one number and at least one special characters</p>
           }
-          <div><a className="link link-hover">Forgot password?</a></div>
-          <button className="btn btn-neutral mt-4">Login</button>
+          <button className="btn btn-accent mt-4">Login</button>
         </fieldset>
+        <SocialLogin></SocialLogin>
+        <p>New to Motiar Store? <Link className='text-blue-400 underline' to='/register'>Register</Link></p>
       </form>
     </div>
   )

@@ -1,6 +1,9 @@
 import React from 'react'
 import { useForm } from 'react-hook-form'
 import useAuth from '../../hooks/useAuth';
+import { Link } from 'react-router';
+import SocialLogin from './SocialLogin';
+import axios from 'axios';
 
 const Register = () => {
   const {
@@ -8,13 +11,37 @@ const Register = () => {
     handleSubmit,
     formState:{errors}
   } = useForm();
-  const {registerUser} = useAuth();
+  const {registerUser, updateUserProfile} = useAuth();
 
   const handleRegistration = (data) => {
     console.log(data);
+    const profileImg = data.photo[0];
+
     registerUser(data.email, data.password)
     .then(result => {
       console.log(result.user);
+      // 1.store the image in form data
+      const formData = new FormData();
+      formData.append('image', profileImg);
+
+      // 2.send the photo to store and get the url
+      const image_API_URL =`https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_image_host}`
+
+      axios.post(image_API_URL, formData)
+      .then(res => {
+        console.log(res.data.data.url);
+
+        // update user profile to firebase
+        const userProfile = {
+          displayName: data.name,
+          photoURL: res.data.data.url
+        }
+        updateUserProfile(userProfile)
+          .then( () => {
+            console.log('user profile updated done')
+          })
+          .catch(error => console.log(error))
+      })
     })
     .catch(error => {
       console.log(error);
@@ -22,12 +49,22 @@ const Register = () => {
   }
 
   return (
-    <div>
+    <div className='w-full mx-auto'>
       <form onSubmit={handleSubmit(handleRegistration)}>
         <fieldset className="fieldset">
+          {/* name */}
+          <label className="label">Name</label>
+          <input type="text" {...register('name', {required: true})} className="input input-bordered w-full" placeholder="Your Name" />
+          {errors.name?.type === 'required' && <p className='text-red-500 font-semibold'>Name is required</p>}
+
+          {/* image */}
+          <label className="label">Photo</label>
+          <input type="file" {...register('photo', {required: true})} className="file-input" placeholder="Your Photo" />
+          {errors.name?.type === 'required' && <p className='text-red-500 font-semibold'>Photo is required</p>}
+
           {/* email */}
           <label className="label">Email</label>
-          <input type="email" {...register('email', {required: true})} className="input" placeholder="Email" />
+          <input type="email" {...register('email', {required: true})} className="input input-bordered w-full" placeholder="Email" />
           {errors.email?.type === 'required' && <p className='text-red-500 font-semibold'>Email is required</p>}
 
           {/* password */}
@@ -36,7 +73,7 @@ const Register = () => {
             required: true,
             minLength: 6,
             pattern: /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[^A-Za-z0-9]).+$/
-            })} className="input" placeholder="Password" />
+            })} className="input input-bordered w-full" placeholder="Password" />
           {
             errors.password?.type === "required" &&
              <p className='text-red-500 font-semibold'>Password is required</p>
@@ -50,9 +87,10 @@ const Register = () => {
             <p className='text-red-500'>Password must be at least one
             uppercase, at least one lowercase, at least one number and at least one special characters</p>
           }
-          <div><a className="link link-hover">Forgot password?</a></div>
-          <button className="btn btn-neutral mt-4">Login</button>
+          <button className="btn btn-accent mt-4">Register</button>
         </fieldset>
+        <SocialLogin></SocialLogin>
+        <p>Already have an Account? <Link className='text-blue-400 underline' to='/login'>Login</Link></p>
       </form>
     </div>
   )
