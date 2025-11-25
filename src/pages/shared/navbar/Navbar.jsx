@@ -74,9 +74,6 @@ const Navbar = () => {
               <Link to="/coverage">Coverage</Link>
             </li>
             <li>
-              <Link to="/about-us">About US</Link>
-            </li>
-            <li>
               <Link to="/pricing">Pricing</Link>
             </li>
             <li>
@@ -85,9 +82,13 @@ const Navbar = () => {
             <li>
               <Link to="/contact">Contact</Link>
             </li>
-            <li>
-              <Link to='/send-parcel'>Send Parcel</Link>
-            </li>
+
+            {
+              user && <>
+                <li><Link to='/send-parcel'>Send Parcel</Link></li>
+                <li><Link to='/dashboard/my-parcel'>My Parcels</Link></li>
+              </>
+            }
           </ul>
         </div>
         <div className="navbar-end">

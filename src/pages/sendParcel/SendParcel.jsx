@@ -2,14 +2,18 @@ import React from "react";
 import { useForm, useWatch } from "react-hook-form";
 import { useLoaderData } from "react-router";
 import Swal from "sweetalert2";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
+import useAuth from './../../hooks/useAuth';
 
 const SendParcel = () => {
   const {
     register,
     handleSubmit,
     control,
-    formState: { errors },
+    // formState: { errors },
   } = useForm();
+  const { user } = useAuth();
+  const axiosSecure = useAxiosSecure();
   const serviceCenters = useLoaderData();
   const regionDuplicate = serviceCenters.map((c) => c.region);
   const regions = [...new Set(regionDuplicate)];
@@ -55,6 +59,12 @@ const SendParcel = () => {
       confirmButtonText: "Yes!",
     }).then((result) => {
       if (result.isConfirmed) {
+
+        // save the parcel in thendatabase
+        axiosSecure.post('/parcels', data)
+          .then(res => {
+            console.log(res.data)
+          })
 
         // Swal.fire({
         //   title: "Deleted!",
@@ -134,6 +144,7 @@ const SendParcel = () => {
                   type="text"
                   className="input w-full"
                   placeholder="Sender Name"
+                  defaultValue={user?.displayName}
                   {...register("senderName")}
                 />
               </div>
@@ -144,6 +155,7 @@ const SendParcel = () => {
                   type="text"
                   className="input w-full"
                   placeholder="Sender Email"
+                  defaultValue={user?.email}
                   {...register("senderEmail")}
                 />
               </div>
