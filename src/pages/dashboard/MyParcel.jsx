@@ -6,6 +6,7 @@ import { FiEdit } from "react-icons/fi";
 import { PiFileMagnifyingGlass } from "react-icons/pi";
 import { FaTrashCan } from "react-icons/fa6";
 import Swal from "sweetalert2";
+import { Link } from "react-router";
 
 const MyParcel = () => {
   const { user } = useAuth();
@@ -57,7 +58,9 @@ const MyParcel = () => {
               <th></th>
               <th>Name</th>
               <th>Cost</th>
-              <th>Payment Status</th>
+              <th>Payment</th>
+              <th>Delivery Status</th>
+              <th>Actions</th>
             </tr>
           </thead>
           <tbody>
@@ -66,6 +69,16 @@ const MyParcel = () => {
                 <th>{index + 1}</th>
                 <td>{parcel.parcelName}</td>
                 <td>{parcel.cost}</td>
+                <td>
+                  {
+                    parcel.paymentStatus === "pais" ?
+                    <span className="text-green-400">Paid</span>:
+                    <Link to={`/dashboard/payment/${parcel._id}`}>
+                      <button className="btn btn-primary btn-small text-black">Pay</button>
+                    </Link>
+                  }
+                </td>
+                <table>{parcel.deliveryStatus}</table>
                 <td>
                   <button className="btn btn-square hover:bg-primary">
                     <PiFileMagnifyingGlass></PiFileMagnifyingGlass>
