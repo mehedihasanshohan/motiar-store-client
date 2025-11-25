@@ -40,7 +40,7 @@ const DashBoardLayout = () => {
                     is-drawer-close:tooltip-right"
           data-tip='MyParcels'
           to='/dashboard/my-parcel'>
-            <CiDeliveryTruck></CiDeliveryTruck>
+            <CiDeliveryTruck className='w-6 h-6'></CiDeliveryTruck>
             <span className='is-drawer-close:hidden'>My Parcels</span>
             </NavLink></li>
 
