@@ -1,9 +1,10 @@
 import React from 'react'
 import { Link, NavLink, Outlet } from 'react-router'
+import { CiDeliveryTruck } from "react-icons/ci";
 
 const DashBoardLayout = () => {
   return (
-    <div className="drawer lg:drawer-open">
+    <div className="drawer lg:drawer-open max-w-7xl mx-auto">
   <input id="my-drawer-4" type="checkbox" className="drawer-toggle" />
   <div className="drawer-content">
     {/* Navbar */}
@@ -34,7 +35,14 @@ const DashBoardLayout = () => {
         </li>
 
         {/* our dashboard links */}
-        <li><NavLink  to='/dashboard/my-parcel'>My parcels</NavLink></li>
+        <li><NavLink
+          className="is-drawer-close:tooltip
+                    is-drawer-close:tooltip-right"
+          data-tip='MyParcels'
+          to='/dashboard/my-parcel'>
+            <CiDeliveryTruck></CiDeliveryTruck>
+            <span className='is-drawer-close:hidden'>My Parcels</span>
+            </NavLink></li>
 
         {/* List item */}
         <li>
