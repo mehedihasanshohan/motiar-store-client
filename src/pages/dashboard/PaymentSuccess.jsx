@@ -1,10 +1,10 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useSearchParams } from 'react-router'
 import useAxiosSecure from './../../hooks/useAxiosSecure';
 
 const PaymentSuccess = () => {
   const [ searchParams ] = useSearchParams();
-  const sessionId = searchParams.get('session_id');
+  const [paymentInfo, setPaymentInfo] = useState({});  const sessionId = searchParams.get('session_id');
   const axiosSecure = useAxiosSecure();
   console.log(sessionId);
 
@@ -13,6 +13,10 @@ const PaymentSuccess = () => {
       axiosSecure.patch(`/payment-success?session_id=${sessionId}`)
       .then(res => {
         console.log(res.data);
+        setPaymentInfo({
+          transactionId: res.data.transactionId,
+          trackingID : res.data.trackingID
+        })
       })
     }
   },[sessionId, axiosSecure])
@@ -21,6 +25,8 @@ const PaymentSuccess = () => {
   return (
     <div>
       <h2 className='text-green-400 font-semibold text-center text-3xl'>Payment Successful</h2>
+      <p>Your transactionId : {paymentInfo.transactionId}</p>
+      <p>Your Parcel Tracking id: {paymentInfo.trackingID}</p>
     </div>
   )
 }
