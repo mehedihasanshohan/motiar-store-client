@@ -15,7 +15,7 @@ const PaymentSuccess = () => {
         console.log(res.data);
         setPaymentInfo({
           transactionId: res.data.transactionId,
-          trackingID : res.data.trackingID
+          trackingId : res.data.trackingId
         })
       })
     }
@@ -26,7 +26,7 @@ const PaymentSuccess = () => {
     <div>
       <h2 className='text-green-400 font-semibold text-center text-3xl'>Payment Successful</h2>
       <p>Your transactionId : {paymentInfo.transactionId}</p>
-      <p>Your Parcel Tracking id: {paymentInfo.trackingID}</p>
+      <p>Your Parcel Tracking id: {paymentInfo.trackingId}</p>
     </div>
   )
 }
