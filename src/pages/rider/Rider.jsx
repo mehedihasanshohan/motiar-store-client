@@ -142,6 +142,7 @@ import { useForm, useWatch } from "react-hook-form";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { useLoaderData, useNavigate } from "react-router";
 import useAuth from "../../hooks/useAuth";
+import Swal from "sweetalert2";
 
 const Rider = () => {
   const {
@@ -166,6 +167,18 @@ const Rider = () => {
 
   const handleRiderApplication = (data) => {
     console.log(data);
+    axiosSecure.post('/riders', data)
+      .then(res => {
+        if(res.data.insertedId){
+          Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: "Your application has been submitted. We will reach to you in next 7 days",
+            showConfirmButton: false,
+            timer: 1500
+          })
+        }
+      })
   };
 
   const districtByRegion = (region) => {
@@ -213,8 +226,8 @@ const Rider = () => {
               <input
                 type="number"
                 className="input w-full"
-                placeholder="Sender Phone Number"
-                {...register("senderPhoneNumber")}
+                placeholder="Rider Phone Number"
+                {...register("riderPhoneNumber")}
               />
             </div>
           </div>
