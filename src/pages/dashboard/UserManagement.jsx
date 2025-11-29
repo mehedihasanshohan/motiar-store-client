@@ -1,17 +1,55 @@
 import React from 'react'
 import useAxiosSecure from '../../hooks/useAxiosSecure'
 import { useQuery } from '@tanstack/react-query';
+import { FaUserShield } from 'react-icons/fa';
+import { FaShield } from 'react-icons/fa6';
+import Swal from 'sweetalert2';
 
 const UserManagement = () => {
   const axiosSecure = useAxiosSecure();
 
-  const { data: users = [] } = useQuery({
+  const { refetch, data: users = [] } = useQuery({
     queryKey: ['users'],
     queryFn: async () => {
       const res = await axiosSecure.get('/users');
       return res.data;
     }
   });
+
+  const handleMakeUser = user => {
+    const {roleInfo} = {role : 'admin'}
+    axiosSecure.patch(`/users/${user._id}`, roleInfo)
+      .then(res => {
+        console.log(res.data);
+        if(res.data.modifiedCount){
+          refetch();
+          Swal.fire({
+            position: 'top-end',
+            icon: 'success',
+            title: `${user.displayName} marked as an admin`,
+            showConfirmButton: false,
+            timer: 1500
+          });
+        }
+      })
+  }
+  const handleRemoveAdmin = user => {
+    const {roleInfo} = {role : 'user'}
+    axiosSecure.patch(`/users/${user._id}`, roleInfo)
+      .then(res => {
+        console.log(res.data);
+        if(res.data.modifiedCount){
+          refetch();
+          Swal.fire({
+            position: 'top-end',
+            icon: 'success',
+            title: `${user.displayName} removed as an admin`,
+            showConfirmButton: false,
+            timer: 1500
+          });
+        }
+      })
+  }
 
   return (
     <div>
@@ -26,6 +64,8 @@ const UserManagement = () => {
               <th>Photo</th>
               <th>Name</th>
               <th>Email</th>
+              <th>Role</th>
+              <th>Actions</th>
             </tr>
           </thead>
 
@@ -47,10 +87,28 @@ const UserManagement = () => {
                 </td>
 
                 {/* Name */}
-                <td>{user.name}</td>
+                <td>{user.displayName}</td>
 
                 {/* Email */}
                 <td>{user.email}</td>
+
+                <td>{user.role}</td>
+
+                <td>
+                  {
+                    user.role === 'admin' ?
+                    <button
+                      onClick={() => handleRemoveAdmin(user)}
+                      className='btn bg-red-200'>
+                      <FaShield></FaShield>
+                    </button> :
+                    <button
+                      onClick={ () => handleMakeUser(user)}
+                      className='btn bg-green-500'>
+                      <FaUserShield></FaUserShield>
+                    </button>
+                  }
+                </td>
               </tr>
             ))}
           </tbody>
