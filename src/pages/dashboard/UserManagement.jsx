@@ -18,7 +18,7 @@ const UserManagement = () => {
 
   const handleMakeUser = user => {
     const roleInfo = {role : 'admin'}
-    axiosSecure.patch(`/users/${user._id}`, roleInfo)
+    axiosSecure.patch(`/users/${user._id}/role`, roleInfo)
       .then(res => {
         console.log(res.data);
         if(res.data.modifiedCount){
