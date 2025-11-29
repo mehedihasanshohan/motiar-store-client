@@ -17,7 +17,7 @@ const UserManagement = () => {
   });
 
   const handleMakeUser = user => {
-    const {roleInfo} = {role : 'admin'}
+    const roleInfo = {role : 'admin'}
     axiosSecure.patch(`/users/${user._id}`, roleInfo)
       .then(res => {
         console.log(res.data);
@@ -34,7 +34,7 @@ const UserManagement = () => {
       })
   }
   const handleRemoveAdmin = user => {
-    const {roleInfo} = {role : 'user'}
+    const roleInfo = {role : 'user'}
     axiosSecure.patch(`/users/${user._id}`, roleInfo)
       .then(res => {
         console.log(res.data);
