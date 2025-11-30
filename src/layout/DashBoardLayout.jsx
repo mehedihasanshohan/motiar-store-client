@@ -117,6 +117,19 @@ const DashBoardLayout = () => {
                   <NavLink
                     className="is-drawer-close:tooltip
                     is-drawer-close:tooltip-right"
+                    data-tip="Assign Riders"
+                    to="/dashboard/assign-riders"
+                  >
+                    <FaMotorcycle className="w-6 h-6"></FaMotorcycle>
+                    <span className="is-drawer-close:hidden">
+                      Assign Riders
+                    </span>
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
+                    className="is-drawer-close:tooltip
+                    is-drawer-close:tooltip-right"
                     data-tip="Users Management"
                     to="/dashboard/users-management"
                   >
