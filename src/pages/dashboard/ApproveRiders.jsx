@@ -56,6 +56,7 @@ const ApproveRiders = () => {
         <th>Email</th>
         <th>District</th>
         <th>Status</th>
+        <th>Work Status</th>
         <th>Actions</th>
       </tr>
     </thead>
@@ -71,6 +72,7 @@ const ApproveRiders = () => {
             'text-green-500' : 'text-orange-500'
           }`}>{rider.status}</p>
         </td>
+        <td>{rider.workStatus}</td>
         <td>
           <button className='btn'>
             <FaEye></FaEye>
